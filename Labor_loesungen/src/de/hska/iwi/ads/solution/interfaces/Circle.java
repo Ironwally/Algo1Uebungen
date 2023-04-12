@@ -14,8 +14,8 @@ public class Circle extends AbstractCircle {
     //Overrides
     @Override
     public void scale(double factor) {
-        if(factor>1) radius += factor;
-        else if (0<=factor) radius -= factor; // 0<=factor<1
+        if(factor>1) radius *= factor;
+        else if (0<=factor) radius /= factor; // 0<=factor<1
     }
 
     @Override
@@ -25,6 +25,6 @@ public class Circle extends AbstractCircle {
 
     @Override
     public double area() {
-        return sqrt(this.getRadius())*Math.PI;
+        return Math.pow(this.getRadius(),2)*Math.PI;
     }
 }
