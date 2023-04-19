@@ -5,10 +5,10 @@ import de.hska.iwi.ads.search.Search;
 import java.util.Collection;
 import java.util.Collections;
 
-public class BinarySearch<E extends Comparable<E>> implements Search {
+public class BinarySearch<E extends Comparable<E>> implements Search<E> {
 
     @Override
-    public int search(Comparable[] a, Comparable key, int left, int right) {
+    public int search(E[] a, E key, int left, int right) {
 
         left = 0;
         right = a.length;
