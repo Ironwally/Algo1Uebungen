@@ -9,25 +9,23 @@ public class BinarySearch<E extends Comparable<E>> implements Search<E> {
 
     @Override
     public int search(E[] a, E key, int left, int right) {
+        int mid = left + (right - left)/2;                   //Kein Cast nötig, int macht alles für dich
+        if(key.compareTo(a[left]) < 0) return left-1;
+        else if(key.compareTo(a[right]) > 0) return right+1;
 
-        left = 0;
-        right = a.length;
+        while (left<=right) {
+            int go = key.compareTo(a[mid]);
 
-        int i = left + (right - left)/2;                   //Kein Cast nötig, int macht alles für dich
-        while (left<right) {
-            int go = key.compareTo(a[i]);
-
-            if (go == 0) return i;
-
-            if (go > 0) {
-                left = i+1;
-                i = left + (right - (i+1))/2;
+            if (go == 0) return mid;
+            else if (go > 0) {
+                left = mid+1;
+                mid = left + (right - left)/2;
             } else {
-                right = i-1;
-                i = left + (right - (i+1))/2;
+                right = mid-1;
+                mid = left + (right - left)/2;
             }
         }
-        return 0;
+        return -1;
     }
 
 }

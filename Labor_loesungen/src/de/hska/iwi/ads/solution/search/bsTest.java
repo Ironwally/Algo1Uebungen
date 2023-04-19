@@ -6,9 +6,25 @@ class bsTest {
     @Test
     void testSearchFunc() {
         BinarySearch bS = new BinarySearch<Integer>();
-        Comparable[] a = new Comparable[]{1, 2, 3, 4, 5, 6};
+        Integer[] a = new Integer[]{1, 2, 3, 4, 5, 6};
 
-        int i = bS.search(a,5,0,a.length-1);
-        assertEquals(5,i);
+        int i = bS.search(a,6,0,a.length-1);
+        assertEquals(5,i,0);
+    }
+    @Test
+    void testSearchOverRight() {
+        BinarySearch bS = new BinarySearch<Integer>();
+        Integer[] a = new Integer[]{1, 2, 3, 4, 5, 6};
+
+        int i = bS.search(a,8,0,a.length-1);
+        assertEquals(6,i,0);
+    }
+    @Test
+    void testSearchUnderLeft() {
+        BinarySearch bS = new BinarySearch<Integer>();
+        Integer[] a = new Integer[]{1, 2, 3, 4, 5, 6};
+
+        int i = bS.search(a,0,0,a.length-1);
+        assertEquals(-1,i,0);
     }
 }
