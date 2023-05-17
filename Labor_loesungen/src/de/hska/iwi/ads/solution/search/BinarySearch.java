@@ -2,9 +2,6 @@ package de.hska.iwi.ads.solution.search;
 
 import de.hska.iwi.ads.search.Search;
 
-import java.util.Collection;
-import java.util.Collections;
-
 public class BinarySearch<E extends Comparable<E>> implements Search<E> {
 
     @Override
@@ -16,7 +13,14 @@ public class BinarySearch<E extends Comparable<E>> implements Search<E> {
         while (left<=right) {
             int go = key.compareTo(a[mid]);
 
-            if (go == 0) return mid;
+            if (go == 0) {
+                if (mid!=0 && key.compareTo(a[mid - 1])==0) {
+                    right=mid-1;
+                    mid = left + (right - left)/2;
+                } else {
+                    return mid;
+                }
+            }
             else if (go > 0) {
                 left = mid+1;
                 mid = left + (right - left)/2;
@@ -25,7 +29,7 @@ public class BinarySearch<E extends Comparable<E>> implements Search<E> {
                 mid = left + (right - left)/2;
             }
         }
-        return -1;
+        return left;
     }
 
 }
