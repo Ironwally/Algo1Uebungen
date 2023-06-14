@@ -19,7 +19,6 @@ public abstract class AbstractHashMap<K extends Comparable<K>, V> extends Abstra
   public AbstractHashMap(int capacity) {
     hashtable = (Entry[]) Array.newInstance(Entry.class, capacity);
   }
-  
   /**
    * iterates all values from the first to the last slot
    */
