@@ -13,13 +13,18 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
     public V get(Object o) {
         @SuppressWarnings("unchecked")
         K key = (K) o;
-        Iterator<Map.Entry<K, V>> it = this.iterator();
-        while (it.hasNext()) {
-            Entry<K,V> entry = (Entry<K, V>) it.next();
-            if(entry.getKey().hashCode() == key.hashCode()) {
-                return entry.getValue();
+        int index = 0;
+        int hash;
+        Entry<K,V> current;
+        do{
+            hash = hash(key,index);
+            current = hahtable[hash]
+            if(current != null && current.getKey() == key) {
+                return current.getValue();
             }
-        }
+            index++;
+        } while(current != null && index < hashtable.length);
+        
         return null;
     }
 
@@ -29,8 +34,9 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         if(value == null) throw new NullPointerException();
         if(size() == hashtable.length) throw new DictionaryFullException();
         //Check Key if already in table and override if so
-        int hash = hash(key);
-        int index = (hash & 0x7FFFFFFF) % hashtable.length;
+        int index = 0;
+        do {
+        int hash = hash(key, index);
         //Iterator doesn't work correctly. When Creating Iterator while Hashtable is still empty, Iterator will auto run till out-off-bounds-exception
         //Iterator<Entry<K,V>> it = this.iterator();
         Entry<K,V> entry = (Entry<K, V>) hashtable[index];
@@ -41,6 +47,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         }
         hashtable[index] = new Entry<>(hash,key,value);
         size++;
+        } while (index < hashtable.length);
         return null;
     }
     /* Es gibt in AbstractHashMap keine remove methoden daher kann ich diese auch nicht überschreiben
@@ -49,8 +56,8 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         throw new UnsupportedOperationException();
     }
 */
-    private int hash(K key) {
-        return Objects.hashCode(key) % hashtable.length;
+    private int hash(K key, int index) {
+        return Math.abs(Objects.hashCode(key) % hashtable.length + (index * index)) % haahtable.length;
     }
 
     private static class Entry<K,V> implements Map.Entry<K,V> {
