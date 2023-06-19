@@ -2,7 +2,7 @@ package de.hska.iwi.ads.solution.hashtable;
 
 import de.hska.iwi.ads.dictionary.AbstractHashMap;
 
-import java.util.Iterator;
+import java.util.AbstractMap;
 //import java.util.Map;
 import java.util.Objects;
 
@@ -37,18 +37,18 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         int index = 0;
         do {
         int hash = hash(key, index);
-        //Iterator doesn't work correctly. When Creating Iterator while Hashtable is still empty, Iterator will auto run till out-off-bounds-exception
-        //Iterator<Entry<K,V>> it = this.iterator();
-        Entry<K,V> entry = (Entry<K, V>) hashtable[index];
+        Entry<K,V> entry = (Entry<K, V>) hashtable[hash];
         if(entry != null) {
             V old = entry.getValue();
-            hashtable[index].setValue(value);
+            hashtable[hash].setValue(value);
             return old;
         }
-        hashtable[index] = new Entry<>(/*hash,*/key,value);
+        //hashtable[hash].setValue(value);
+        hashtable[hash] = new AbstractMap.SimpleEntry<>(key,value);
         size++;
-        } while (index < hashtable.length);
         return null;
+        } while (index < hashtable.length);
+        //return null;
     }
     /* Es gibt in AbstractHashMap keine remove methoden daher kann ich diese auch nicht überschreiben
     @Override
