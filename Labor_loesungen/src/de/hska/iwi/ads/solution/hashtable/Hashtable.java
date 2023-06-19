@@ -3,7 +3,7 @@ package de.hska.iwi.ads.solution.hashtable;
 import de.hska.iwi.ads.dictionary.AbstractHashMap;
 
 import java.util.Iterator;
-import java.util.Map;
+//import java.util.Map;
 import java.util.Objects;
 
 public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V> {
@@ -18,7 +18,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         Entry<K,V> current;
         do{
             hash = hash(key,index);
-            current = hahtable[hash]
+            current = hashtable[hash];
             if(current != null && current.getKey() == key) {
                 return current.getValue();
             }
@@ -45,7 +45,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
             hashtable[index].setValue(value);
             return old;
         }
-        hashtable[index] = new Entry<>(hash,key,value);
+        hashtable[index] = new Entry<>(/*hash,*/key,value);
         size++;
         } while (index < hashtable.length);
         return null;
@@ -57,9 +57,9 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
     }
 */
     private int hash(K key, int index) {
-        return Math.abs(Objects.hashCode(key) % hashtable.length + (index * index)) % haahtable.length;
+        return Math.abs(Objects.hashCode(key) % hashtable.length + (index * index)) % hashtable.length;
     }
-
+/*
     private static class Entry<K,V> implements Map.Entry<K,V> {
         final int hash;
         final K key;
@@ -101,4 +101,5 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
             return key.toString()+"="+value.toString();
         }
     }
+    */
 }
