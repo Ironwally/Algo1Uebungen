@@ -32,22 +32,26 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
     public V put(K key, V value) {
         //check value for null
         if(value == null) throw new NullPointerException();
-        if(size() == hashtable.length) throw new DictionaryFullException();
         //Check Key if already in table and override if so
         int index = 0;
+        int hash;
         do {
-        int hash = hash(key, index);
+        hash = hash(key, index);
         Entry<K,V> entry = (Entry<K, V>) hashtable[hash];
-        if(entry != null) {
+        if(entry.getKey() == key) {
             V old = entry.getValue();
             hashtable[hash].setValue(value);
             return old;
         }
-        //hashtable[hash].setValue(value);
-        hashtable[hash] = new AbstractMap.SimpleEntry<>(key,value);
-        size++;
-        return null;
+        if(entry == null) {
+            //hashtable[hash].setValue(value);
+            hashtable[hash] = new AbstractMap.SimpleEntry<>(key,value);
+            this.size++;
+            return null;
+        }
+            index++;
         } while (index < hashtable.length);
+        throw new DictionaryFullException();
         //return null;
     }
     /* Es gibt in AbstractHashMap keine remove methoden daher kann ich diese auch nicht überschreiben
