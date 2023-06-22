@@ -38,7 +38,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         do {
         hash = hash(key, index);
         Entry<K,V> entry = (Entry<K, V>) hashtable[hash];
-        if(entry.getKey() == key) {
+        if(entry != null && entry.getKey() == key) {
             V old = entry.getValue();
             hashtable[hash].setValue(value);
             return old;
