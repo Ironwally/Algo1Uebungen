@@ -37,6 +37,7 @@ public class BinarySearchTree<K extends Comparable<K>,V> extends AbstractBinaryT
         if(y==null) this.root = z;
         else if(key.compareTo(y.entry.getKey()) < 0) y.left = z;
         else y.right = z;
+        this.size++;
         return null;
     }
 }
