@@ -7,7 +7,16 @@ public class BinarySearchTree<K extends Comparable<K>,V> extends AbstractBinaryT
     public V get(Object o) {
         @SuppressWarnings("unchecked")
         K key = (K) o;
-
+        Node x = this.root;
+        while (x != null) {
+            if (key.compareTo(x.entry.getKey()) < 0) {               //If key is smaller than key of x
+                x = x.left;
+            } else if (key.compareTo(x.entry.getKey()) > 0) {        //If key is bigger than key of x
+                x = x.right;
+            } else {                                                //If key is equal to key of x
+                return x.entry.getValue();
+            }
+        }
         return null;
     }
     public V put(K key, V value) {
