@@ -19,7 +19,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         do{
             hash = hash(key,index);
             current = hashtable[hash];
-            if(current != null && current.getKey() == key) {
+            if(current != null && current.getKey().compareTo(key)==0) {
                 return current.getValue();
             }
             index++;
@@ -38,7 +38,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         do {
         hash = hash(key, index);
         Entry<K,V> entry = (Entry<K, V>) hashtable[hash];
-        if(entry != null && entry.getKey() == key) {
+        if(entry != null && entry.getKey().compareTo(key)==0) {
             V old = entry.getValue();
             hashtable[hash].setValue(value);
             return old;

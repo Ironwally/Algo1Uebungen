@@ -11,7 +11,7 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
         ListElement current = this.head;
         if(current!=null) {
             for (; current != null; current = current.next) {
-                if (current.entry.getKey() == key) return current.entry.getValue();
+                if (current.entry.getKey().compareTo(key)==0) return current.entry.getValue();
             }
         }
         return null;
@@ -22,7 +22,7 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
         ListElement newHead = new ListElement(new SimpleEntry<>(key,value),null,this.head);
         if(current!=null) {
             for (; current.next != null; current = current.next) {
-                if (current.entry.getKey() == key) {
+                if (current.entry.getKey().compareTo(key) == 0) {
                     V old = current.entry.getValue();
                     current.entry.setValue(value);
                     return old;
