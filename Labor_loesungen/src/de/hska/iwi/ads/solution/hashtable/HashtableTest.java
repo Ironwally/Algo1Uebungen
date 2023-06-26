@@ -3,7 +3,6 @@ package de.hska.iwi.ads.solution.hashtable;
 import de.hska.iwi.ads.dictionary.AbstractDictionary;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HashtableTest {
@@ -50,6 +49,10 @@ public class HashtableTest {
         assertEquals("Hot Pics of Peppa Pig",ht.get("lol"));
         assertEquals("Luke, Ich bin dein Vadda!",ht.get("vader"));
     }
+
+    /**
+     * Should throw the DictionaryFullException
+     */
     @Test
     void testOverflow() {
         Hashtable<String, String> ht = new Hashtable<>(2);
@@ -58,6 +61,6 @@ public class HashtableTest {
         try {
             ht.put("op","Anakin OP Sky-boy");
             assertEquals("If you reach this Code the Test has failed.","As the Test is supposed to throw the DictionaryFullException Error.");
-        } catch (AbstractDictionary.DictionaryFullException e) {};
+        } catch (AbstractDictionary.DictionaryFullException e) {}
     }
 }
