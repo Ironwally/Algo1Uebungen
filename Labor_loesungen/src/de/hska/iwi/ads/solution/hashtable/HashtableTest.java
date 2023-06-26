@@ -1,11 +1,20 @@
 package de.hska.iwi.ads.solution.hashtable;
 
 import de.hska.iwi.ads.dictionary.AbstractDictionary;
+import de.hska.iwi.ads.dictionary.MapTest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Map;
 
-public class HashtableTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class HashtableTest extends MapTest {
+
+    @Override
+    public <K extends Comparable<K>, V> Hashtable<K, V> createMap () {
+        return new Hashtable<>(400);
+    }
 
     @Test
     void testSize () {
@@ -14,6 +23,7 @@ public class HashtableTest {
         System.out.println("Size of Hashtable: " + ht.size());
         assertEquals(1,ht.size());
     }
+
     @Test
     void testGet() {
         Hashtable<String, String> ht = new Hashtable<>(100);
@@ -60,7 +70,9 @@ public class HashtableTest {
         ht.put("hot","Hot Pics of Peppa Pig");
         try {
             ht.put("op","Anakin OP Sky-boy");
-            assertEquals("If you reach this Code the Test has failed.","As the Test is supposed to throw the DictionaryFullException Error.");
+            assertEquals("AbstractDictionary.DictionaryFullException to be thrown","But nothing was thrown.");
         } catch (AbstractDictionary.DictionaryFullException e) {}
+        //Meine eigene obere Methode ist einfach grundsätzlich überlegen
+        //assertThrows(AbstractDictionary.DictionaryFullException.class, () -> ht.put("op","Anakin OP Sky-boy"));
     }
 }
