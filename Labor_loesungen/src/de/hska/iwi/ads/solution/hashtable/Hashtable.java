@@ -11,6 +11,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
         super(capacity);
     }
     public V get(Object o) {
+        if(o==null) throw new NullPointerException();
         @SuppressWarnings("unchecked")
         K key = (K) o;
         int index = 0;
@@ -30,8 +31,8 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K, V>
 
     @Override
     public V put(K key, V value) {
-        //check value for null
-        if(value == null) throw new NullPointerException();
+        //check value for null - "" -> Empty String accepted as parameter
+        if(value == null || value.toString().toLowerCase().equals("null")) throw new NullPointerException();
         //Check Key if already in table and override if so
         int index = 0;
         int hash;
